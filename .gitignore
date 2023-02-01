@@ -4,8 +4,7 @@
 __pycache__
 venv
 db.sqlite3
-/static
+static/
 .DS_Store
 .idea
-config.json
 media/
