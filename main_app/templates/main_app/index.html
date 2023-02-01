@@ -1,0 +1,23 @@
+{% extends 'main_app/base.html' %}
+{% load main_app_tags %}
+
+{% block content %}
+<div class="home-content">
+
+	{% show_categories_btns cats %}
+
+	<div id="alls" class="posts-scrollbar-wrap active-data">
+		<section class="posts-scrollbar">
+			{% show_posts amt=10 %}
+		</section>
+	</div>
+	{% for cat in cats %}
+		<div id="{{ cat.name }}" class="posts-scrollbar-wrap">
+			<section class="posts-scrollbar">
+				{% show_posts cat.pk 10 %}
+			</section>
+		</div>
+	{% endfor %}
+
+</div>
+{% endblock %}
