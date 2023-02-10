@@ -8,7 +8,12 @@ from baryshev import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
-    path('', include('main_app.urls'))
+    path('', include('main_app.urls')),
+    path('posts/', include('posts.urls')),
+    path('books/', include('books.urls')),
+    path('films/', include('films.urls')),
+    path('travels/', include('travels.urls')),
+    path('creations/', include('creations.urls')),
 ]
 
 if settings.DEBUG:

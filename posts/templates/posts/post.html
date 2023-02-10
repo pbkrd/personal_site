@@ -1,0 +1,26 @@
+{% extends 'main_app/base.html' %}
+{% load posts_tags %}
+
+{% block content %}
+
+<div class="post-content">
+
+	<h3 class="post-title">{{ post.title }}</h3>
+
+	{% if post.photo %}
+		<div class="post-img-wrap">
+			<img class="post-img" src="{{ post.photo.url }}" alt="Card image cap">
+		</div>
+	{% endif %}
+
+	<div class="post-body">
+		<p class="post-text">{{ post.content }}</p>
+		<div class="post-footer-wrap">
+			<span class="post-footer_left">#{{ post.cat }}</span>
+			<span class="post-footer_right">{{ post.created_date|date:"d.m.y" }}</span>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+<ul class="cards-categories-wrap">
+    <li class="card-category-wrap active">
+        <button class="btn-category" onclick="changeCat(this, alls)">
+            <span class="btn-category-name" >#all</span>
+            <span class="btn-category-amt">{{ amt_posts }}</span>
+        </button>
+    </li>
+
+	{% for cat in cats %}
+         <li class="card-category-wrap">
+             <button class="btn-category" onclick="changeCat(this, {{ cat.name }})">
+                 <span class="btn-category-name" >#{{ cat.name }}</span>
+                 <span class="btn-category-amt">{{ cat.post_set.count }}</span>
+             </button>
+         </li>
+	{% endfor %}
+</ul>

@@ -1,16 +1,17 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{title}}</title>
+	<title>{{ title }}</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-	<link type="text/css" href="{% static 'main_app/css/styles.css' %}" rel="stylesheet" />
+	{% for app in apps %}
+		<link type="text/css" href="{% get_static_prefix %}{{ app.slug }}/css/styles.css" rel="stylesheet" />
+	{% endfor %}
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="shortcut icon" href="{% static 'main_app/images/main.ico' %}" type="image/x-icon"/>
+	<link rel="shortcut icon" href="{% static 'main_app/images/letter-b.png' %}" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -18,12 +19,14 @@
 		<div class="header-inner">
 			<div class="header-top-wrap">
 				<div class="header-logo-wrap">
-					<div class="logo"><a href="{% url 'home' %}"></a></div>
+					<a class="logo" href="{% url 'home' %}">
+						<img class="logo" src="{% static 'main_app/images/logo.png' %}">
+					</a>
 				</div>
 				<div class="header-buttons-wrap">
 					<ul class="header-menu">
 						{% if request.user.is_authenticated %}
-							<li class="right"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
+							<li class="right">{{ user.username }} | <a href="{% url 'logout' %}">Выйти</a></li>
 						{% else %}
 							<li class="right"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
 						{% endif %}
@@ -33,11 +36,17 @@
 			<div class="header-bottom-wrap">
 				<div class="header-mainmenu-wrap">
 					<ul class="header-mainmenu">
-						{% for m in menu_header %}
-							{% if m.pk == cat_selected %}
-								<li class="selected">{{ m.title }}</li>
-							{% else %}
-								<li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+						{% for app in apps %}
+							{% if app.title not in non_printable_apps %}
+								{% if app.pk == app_selected %}
+									<li class="app_{{ app.pk }} selected">
+										<a class="selected" href="#">{{ app.title }}</a>
+									</li>
+								{% else %}
+									<li class="app_{{ app.pk }}">
+										<a href="{{ app.get_absolute_url }}">{{ app.title }}</a>
+									</li>
+								{% endif %}
 							{% endif %}
 						{% endfor %}
 					</ul>
@@ -61,7 +70,7 @@
 				<a class="footer-button vk" href="https://vk.com/petro_freeman" target="_blank"></a>
 				<a class="footer-button insta" href="https://www.instagram.com/pb_krd/?hl=ru" target="_blank"></a>
 				<a class="footer-button github" href="https://github.com/pbkrd" target="_blank"></a>
-				<a class="footer-button linkedin" href="https://ru.linkedin.com/" target="_blank"></a>
+				<a class="footer-button linkedin" href="https://www.linkedin.com/in/peter-parker-8ab683265/" target="_blank"></a>
 			</div>
 			<span class="footer-bottom">&copy; 2022-2023 Самый что ни на есть личный, в целом, учебно-практический, но иногда еще и познавательный сайт Барышева П.А.</span>
 		</div>

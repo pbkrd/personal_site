@@ -1,10 +1,11 @@
 *.pyc
 *.env
 *~
-__pycache__
+__pycache__/
 venv
 db.sqlite3
 static/
 .DS_Store
 .idea
 media/
+config.json

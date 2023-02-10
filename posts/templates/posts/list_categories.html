@@ -1,0 +1,36 @@
+<ul class="cards-categories-wrap">
+    {% if cat_selected == 0 %}
+        <li class="card-category-wrap active">
+            <div class="btn-category">
+                <span class="btn-category-name" >#all</span>
+                <span class="btn-category-amt">{{ amt_posts }}</span>
+            </div>
+        </li>
+    {% else %}
+        <li class="card-category-wrap">
+            <a class="btn-category" href="{% url 'posts' %}">
+                <span class="btn-category-name" >#all</span>
+                <span class="btn-category-amt">{{ amt_posts }}</span>
+            </a>
+        </li>
+    {% endif %}
+
+
+	{% for cat in cats %}
+         {% if cat.pk == cat_selected %}
+                   <li class="card-category-wrap active">
+                       <div class="btn-category">
+                           <span class="btn-category-name" >#{{ cat.name }}</span>
+                           <span class="btn-category-amt">{{ cat.post_set.count }}</span>
+                       </div>
+                   </li>
+         {% else %}
+                   <li class="card-category-wrap">
+                       <a class="btn-category" href="{{ cat.get_absolute_url }}">
+                           <span class="btn-category-name" >#{{ cat.name }}</span>
+                           <span class="btn-category-amt">{{ cat.post_set.count }}</span>
+                       </a>
+                   </li>
+         {% endif %}
+	{% endfor %}
+</ul>

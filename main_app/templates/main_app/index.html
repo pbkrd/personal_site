@@ -1,20 +1,20 @@
 {% extends 'main_app/base.html' %}
-{% load main_app_tags %}
+{% load posts_tags %}
 
 {% block content %}
 <div class="home-content">
 
-	{% show_categories_btns cats %}
+	{% show_categories_btns %}
 
 	<div id="alls" class="posts-scrollbar-wrap active-data">
 		<section class="posts-scrollbar">
-			{% show_posts amt=10 %}
+			{% show_posts amt=10 last=True %}
 		</section>
 	</div>
 	{% for cat in cats %}
 		<div id="{{ cat.name }}" class="posts-scrollbar-wrap">
 			<section class="posts-scrollbar">
-				{% show_posts cat.pk 10 %}
+				{% show_posts cat.pk 10 last=True %}
 			</section>
 		</div>
 	{% endfor %}
